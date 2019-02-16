@@ -29,6 +29,7 @@ public class ImageUtils {
 			throws IOException {
 		File[] items = folder.listFiles();
 		List<BufferedImage> result = new ArrayList<BufferedImage>();
+		assert items != null; // 避免空指针
 		for (File item : items) {
 			if (item.getName().endsWith(suffix))
 				result.add(ImageIO.read(item));
@@ -45,19 +46,18 @@ public class ImageUtils {
 			Integer index = random.nextInt(orgImages.size());
 			if (randomIndex.contains(index)) {
 				i--;
-				continue;
 			} else {
 				randomIndex.add(index);
 			}
 		}
-		for (int i = 0; i < randomIndex.size(); i++) {
-			result.add(orgImages.get(randomIndex.get(i)));
+		for (Integer randomIndex1 : randomIndex) {
+			result.add(orgImages.get(randomIndex1));
 		}
 		return result;
 	}
 
 	
-	public static List<BufferedImage> getRandomImages(
+	private static List<BufferedImage> getRandomImages(
 			List<BufferedImage> orgImages, int size) {
 		List<BufferedImage> result = new ArrayList<BufferedImage>();
 		Random random = new Random();

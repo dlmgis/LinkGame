@@ -16,7 +16,6 @@ public class MyTest {
 			//System.out.println(ImageUtils.getBackgroundImageIcon().getIconHeight());
 			ImageUtils.randomImages(ImageUtils.getImages(new File(ImageUtils.IMAGE_FOLDER_NAME +File.separator+ImageUtils.PIECE_IMAGE_FOLDER_NAME), ImageUtils.IMAGE_TYPE));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

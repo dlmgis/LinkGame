@@ -105,7 +105,7 @@ public class GameServiceImpl implements GameService {
 		return null;
 	}
 
-	Piece getCornerPiece(Piece aPiece, Piece bPiece, int xStep, int yStep) {
+	private Piece getCornerPiece(Piece aPiece, Piece bPiece, int xStep, int yStep) {
 		if (aPiece.getBeginX() > bPiece.getBeginX()) {
 			return getCornerPiece(bPiece, aPiece, xStep, yStep);
 		}
@@ -179,8 +179,8 @@ public class GameServiceImpl implements GameService {
 				+ Math.abs(aPiece.getBeginY() - bPiece.getBeginY());
 	}
 
-	Map<Piece, Piece> getLinkPieces(Piece aPiece, Piece bPiece, int xStep,
-			int yStep) {
+	private Map<Piece, Piece> getLinkPieces(Piece aPiece, Piece bPiece, int xStep,
+											int yStep) {
 		Map<Piece, Piece> result = new HashMap<Piece, Piece>();  
 		int maxWidth = gameModel.getCommonImageWidth()
 				* (config.getRowNums() + 2) + config.getBeginPieceX();
@@ -250,13 +250,13 @@ public class GameServiceImpl implements GameService {
 		return result;
 	}
 
-	Map<Piece, Piece> getXLinkPieces(List<Piece> aChannel,
-			List<Piece> bChannel, int step) {
+	private Map<Piece, Piece> getXLinkPieces(List<Piece> aChannel,
+											 List<Piece> bChannel, int step) {
 		Map<Piece, Piece> result = new HashMap<Piece, Piece>();
 		for (Piece pieceOfaChannel : aChannel) {
 			for (Piece pieceOfbChannel : bChannel) {
 				if (pieceOfaChannel.getBeginY() == pieceOfbChannel.getBeginY()
-						&& isXBlock(pieceOfaChannel, pieceOfbChannel, step) == false) {
+						&& !isXBlock(pieceOfaChannel, pieceOfbChannel, step)) {
 					result.put(pieceOfaChannel, pieceOfbChannel);
 				}
 			}
@@ -264,13 +264,13 @@ public class GameServiceImpl implements GameService {
 		return result;
 	}
 
-	Map<Piece, Piece> getYLinkPieces(List<Piece> aChannel,
-			List<Piece> bChannel, int step) {
+	private Map<Piece, Piece> getYLinkPieces(List<Piece> aChannel,
+											 List<Piece> bChannel, int step) {
 		Map<Piece, Piece> result = new HashMap<Piece, Piece>();
 		for (Piece pieceOfaChannel : aChannel) {
 			for (Piece pieceOfbChannel : bChannel) {
 				if (pieceOfaChannel.getBeginX() == pieceOfbChannel.getBeginX()
-						&& isYBlock(pieceOfaChannel, pieceOfbChannel, step) == false) {
+						&& !isYBlock(pieceOfaChannel, pieceOfbChannel, step)) {
 					result.put(pieceOfaChannel, pieceOfbChannel);
 				}
 			}
@@ -278,7 +278,7 @@ public class GameServiceImpl implements GameService {
 		return result;
 	}
 
-	Piece getCrossPoint(List<Piece> aChannel, List<Piece> bChannel) {
+	private Piece getCrossPoint(List<Piece> aChannel, List<Piece> bChannel) {
 		for (Piece pieceOfaChannel : aChannel) {
 			for (Piece pieceOfbChannel : bChannel) {
 				if (pieceOfaChannel.getBeginPoint().equals(
@@ -290,7 +290,7 @@ public class GameServiceImpl implements GameService {
 		return null;
 	}
 
-	boolean isXBlock(Piece aPiece, Piece bPiece, int step) {
+	private boolean isXBlock(Piece aPiece, Piece bPiece, int step) {
 		if (bPiece.getBeginPoint().isLeft(aPiece.getBeginPoint()))
 			return isXBlock(bPiece, aPiece, step);
 		for (int i = aPiece.getBeginX() + step; i < bPiece.getBeginX(); i += step) {
@@ -301,7 +301,7 @@ public class GameServiceImpl implements GameService {
 		return false;
 	}
 
-	boolean isYBlock(Piece aPiece, Piece bPiece, int step) {
+	private boolean isYBlock(Piece aPiece, Piece bPiece, int step) {
 		if (bPiece.getBeginPoint().isUp(aPiece.getBeginPoint()))
 			return isYBlock(bPiece, aPiece, step);
 		for (int i = aPiece.getBeginY() + step; i < bPiece.getBeginY(); i += step) {
@@ -311,7 +311,7 @@ public class GameServiceImpl implements GameService {
 		return false;
 	}
 
-	public List<Piece> getUpChannel(Piece piece, int ylimit, int step) {
+	private List<Piece> getUpChannel(Piece piece, int ylimit, int step) {
 		List<Piece> channel = new ArrayList<Piece>();
 		int x = piece.getBeginX();
 		for (int i = piece.getBeginY() - step; i >= ylimit; i -= step) {
@@ -328,7 +328,7 @@ public class GameServiceImpl implements GameService {
 		return channel;
 	}
 
-	public List<Piece> getDownChannel(Piece piece, int ylimit, int step) {
+	private List<Piece> getDownChannel(Piece piece, int ylimit, int step) {
 		List<Piece> channel = new ArrayList<Piece>();
 		int x = piece.getBeginX();
 		for (int i = piece.getBeginY() + step; i <= ylimit; i += step) {
@@ -345,7 +345,7 @@ public class GameServiceImpl implements GameService {
 		return channel;
 	}
 
-	public List<Piece> getLeftChannel(Piece piece, int xlimit, int step) {
+	private List<Piece> getLeftChannel(Piece piece, int xlimit, int step) {
 		List<Piece> channel = new ArrayList<Piece>();
 		int y = piece.getBeginY();
 		for (int i = piece.getBeginX() - step; i >= xlimit; i -= step) {
@@ -362,7 +362,7 @@ public class GameServiceImpl implements GameService {
 		return channel;
 	}
 
-	public List<Piece> getRightChannel(Piece piece, int xlimit, int step) {
+	private List<Piece> getRightChannel(Piece piece, int xlimit, int step) {
 		List<Piece> channel = new ArrayList<Piece>();
 		int y = piece.getBeginY();
 		for (int i = piece.getBeginX() + step; i <= xlimit; i += step) {
@@ -380,10 +380,10 @@ public class GameServiceImpl implements GameService {
 	}
 
 	public boolean empty() {
-		for (int i = 0; i < this.pieces.length; i++) {
-			for (int j = 0; j < this.pieces[i].length; j++) {
-				if (this.pieces[i][j] != null
-						&& this.pieces[i][j].getImage() != null)
+		for (Piece[] piece : this.pieces) {
+			for (Piece piece1 : piece) {
+				if (piece1 != null
+						&& piece1.getImage() != null)
 					return false;
 			}
 		}
@@ -394,7 +394,7 @@ public class GameServiceImpl implements GameService {
 		return findPiece(x, y) != null;
 	}
 
-	public boolean hasImage(int x, int y) {
+	private boolean hasImage(int x, int y) {
 		Piece piece = findPiece(x, y);
 		if (piece == null) {
 			return false;
@@ -410,13 +410,13 @@ public class GameServiceImpl implements GameService {
 				pieceSide));
 	}
 
-	public int getXIndex(int relativeX, int pieceWidth) {
+	private int getXIndex(int relativeX, int pieceWidth) {
 		if (pieceWidth < 0)
 			return -1;
 		return (int) relativeX / pieceWidth;
 	}
 
-	public int getYIndex(int relativeY, int pieceHeight) {
+	private int getYIndex(int relativeY, int pieceHeight) {
 		if (pieceHeight < 0)
 			return -1;
 		return (int) relativeY / pieceHeight;

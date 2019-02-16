@@ -49,7 +49,7 @@ public abstract class GameModel {
 	abstract public List<Piece> createLogicPieces(GameConfiguration config,
 			Piece[][] pieces);
 
-	public List<BufferedImage> getPieceImages(int num) {
+	private List<BufferedImage> getPieceImages(int num) {
 		try {
 			return ImageUtils.getPieceImages(num);
 		} catch (GameException e) {

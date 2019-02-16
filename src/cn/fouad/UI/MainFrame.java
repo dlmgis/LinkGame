@@ -33,8 +33,6 @@ import cn.fouad.service.impl.GameServiceImpl;
  */
 public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
-    private final int DEFAULT_WIDTH = 830;
-    private final int DEFAULT_HEIGHT = 600;
     private JPanel backgroundPanel = null;
 
     public MainFrame() {
@@ -72,6 +70,8 @@ public class MainFrame extends JFrame {
     private void initialize() {
         setTitle("连连看"); // 设置标题
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置关闭时退出
+        int DEFAULT_WIDTH = 830;
+        int DEFAULT_HEIGHT = 600;
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT); // 设置宽度和高度
         this.setLocationRelativeTo(null); // 居中
         setResizable(false); // 不可改变大小，不做大小自适应，写死

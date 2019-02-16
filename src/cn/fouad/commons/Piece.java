@@ -77,7 +77,7 @@ public class Piece {
 		this.beginPoint = beginPosition;
 	}
 
-	public Point getEndPoint() {
+	private Point getEndPoint() {
 		return endPoint;
 	}
 

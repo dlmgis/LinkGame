@@ -9,7 +9,7 @@ import cn.fouad.UI.GamePanel;
 import cn.fouad.utils.ImageUtils;
 
 /**
- * Timer
+ * 时间计时器
  */
 public class GameTimer extends TimerTask {
 

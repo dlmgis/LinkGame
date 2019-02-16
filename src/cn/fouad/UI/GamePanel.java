@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
 		this.linkInfo = linkInfo;
 	}
 
-	public GamePanel(GameServiceImpl gameService) {
+	GamePanel(GameServiceImpl gameService) {
 		this.setBackground(new Color(55, 77, 118));
 		this.setBorder(new EtchedBorder());
 		this.gameService = gameService;
@@ -61,13 +61,13 @@ public class GamePanel extends JPanel {
 		}
 		Piece[][] pieces = gameService.getPieces();
 		if (pieces != null) {
-			for (int i = 0; i < pieces.length; i++) {
-				for (int j = 0; j < pieces[i].length; j++) {
-					if (pieces[i][j] != null && pieces[i][j].getImage() != null) {
+			for (Piece[] piece : pieces) {
+				for (Piece piece1 : piece) {
+					if (piece1 != null && piece1.getImage() != null) {
 						// System.out.println(pieces[i][j].getBeginX());
-						g.drawImage(pieces[i][j].getImage(),
-								pieces[i][j].getBeginX(),
-								pieces[i][j].getBeginY(), null);
+						g.drawImage(piece1.getImage(),
+								piece1.getBeginX(),
+								piece1.getBeginY(), null);
 					}
 				}
 			}
