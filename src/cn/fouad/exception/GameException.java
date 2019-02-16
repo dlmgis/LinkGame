@@ -21,6 +21,10 @@ public class GameException extends Exception {
         super(arg0, arg1);
     }
 
+    /**
+     * 抛出异常信息
+     * @param arg0 异常信息
+     */
     public GameException(String arg0) {
         super(arg0);
     }

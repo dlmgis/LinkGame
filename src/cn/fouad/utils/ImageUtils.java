@@ -87,6 +87,11 @@ public class ImageUtils {
         return result;
     }
 
+    /**
+     * @param pathname 路径
+     * @return 图片
+     * @throws IOException IO异常
+     */
     public static BufferedImage getImage(String pathname) throws IOException {
         return ImageIO.read(new File(pathname));
     }

@@ -22,3 +22,5 @@ out/
 *.iml
 
 META-INF/
+
+doc/
