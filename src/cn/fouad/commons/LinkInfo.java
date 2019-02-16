@@ -1,16 +1,15 @@
 package cn.fouad.commons;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LinkInfo {
 
-	List<Piece> pieces = new ArrayList<Piece>();
+	private List<Piece> pieces = new ArrayList<Piece>();
 
 	public LinkInfo(Piece... aPieces) {
-		for (Piece piece : aPieces) {
-			this.pieces.add(piece);
-		}
+		this.pieces.addAll(Arrays.asList(aPieces));
 	}
 
 	public List<Piece> getPieces() {

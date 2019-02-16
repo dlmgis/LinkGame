@@ -4,6 +4,13 @@ import java.awt.image.BufferedImage;
 
 import cn.fouad.utils.ImageUtils;
 
+/**
+ * 一个连连看元素，或者说一个一个的小图片
+ * beginPoint 图片左上角的坐标
+ * endPoint 图片右下角的坐标，由构造方法自动获得
+ * image 显示的图片
+ * indexPoint 索引点
+ */
 public class Piece {
 	private Point beginPoint;
 	private Point endPoint;
@@ -95,7 +102,7 @@ public class Piece {
 	}
 
 	public boolean HasSameImage(Piece piece) {
-		return ImageUtils.eauals(image, piece.getImage());
+		return ImageUtils.equals(image, piece.getImage());
 	}
 
 }

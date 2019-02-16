@@ -13,8 +13,12 @@ import cn.fouad.commons.Point;
 import cn.fouad.service.GameModel;
 import cn.fouad.service.GameService;
 
+/**
+ * 使用模板模式
+ * 游戏业务逻辑的具体实现
+ */
 public class GameServiceImpl implements GameService {
-	Piece[][] pieces = null;
+	private Piece[][] pieces = null;
 	private GameConfiguration config;
 	private GameModel gameModel;
 	private long grade = 0;
@@ -25,10 +29,11 @@ public class GameServiceImpl implements GameService {
 
 	public void start() {
 		this.gameModel = createGameModel(config);
+		assert gameModel != null;
 		this.pieces = gameModel.createRealPieces(config);
 	}
 
-	public GameModel createGameModel(GameConfiguration config) {
+	private GameModel createGameModel(GameConfiguration config) {
 		Random random = new Random();
 		switch (random.nextInt(config.MODELNUM)) {
 		case 0:
@@ -67,7 +72,7 @@ public class GameServiceImpl implements GameService {
 		if (aPieceBeginPoint.equals(bPieceBeginPoint)) {
 			return null;
 		}
-		if (aPiece.HasSameImage(bPiece) == false) {
+		if (!aPiece.HasSameImage(bPiece)) {
 			return null;
 		}
 		if (aPieceBeginPoint.getX() > bPieceBeginPoint.getX())
@@ -76,14 +81,14 @@ public class GameServiceImpl implements GameService {
 		int commonImageWidth = gameModel.getCommonImageWidth();
 		int commonImageHeight = gameModel.getCommonImageHeight();
 
-		if (aPieceBeginPoint.inSameXline(bPieceBeginPoint)) {
-			if (isXBlock(aPiece, bPiece, commonImageWidth) == false) {
+		if (aPieceBeginPoint.inSameXLine(bPieceBeginPoint)) {
+			if (!isXBlock(aPiece, bPiece, commonImageWidth)) {
 				return new LinkInfo(aPiece, bPiece);
 			}
 		}
 
-		if (aPieceBeginPoint.inSameYline(bPieceBeginPoint)) {
-			if (isYBlock(aPiece, bPiece, commonImageHeight) == false) {
+		if (aPieceBeginPoint.inSameYLine(bPieceBeginPoint)) {
+			if (!isYBlock(aPiece, bPiece, commonImageHeight)) {
 				return new LinkInfo(aPiece, bPiece);
 			}
 		}
@@ -201,14 +206,14 @@ public class GameServiceImpl implements GameService {
 			return getLinkPieces(bPiece, aPiece, xStep, yStep);
 		}
 
-		if (bPiece.getBeginPoint().inSameXline(bPiece.getBeginPoint())) {
+		if (bPiece.getBeginPoint().inSameXLine(bPiece.getBeginPoint())) {
 			result.putAll(getXLinkPieces(aPieceUpChannel, bPieceUpChannel,
 					yStep));
 			result.putAll(getXLinkPieces(aPieceDownChannel, bPieceDownChannel,
 					yStep));
 		}
 
-		if (bPiece.getBeginPoint().inSameYline(bPiece.getBeginPoint())) {
+		if (bPiece.getBeginPoint().inSameYLine(bPiece.getBeginPoint())) {
 			result.putAll(getYLinkPieces(aPieceLeftChannel, bPieceLeftChannel,
 					xStep));
 			result.putAll(getYLinkPieces(aPieceRightChannel,

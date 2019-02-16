@@ -13,7 +13,10 @@ import cn.fouad.commons.GameConfiguration;
 import cn.fouad.service.impl.GameServiceImpl;
 import cn.fouad.timer.GameTimer;
 
- 
+
+/**
+ * 对“开始”按钮的事件监听
+ */
 public class BeginListener extends MouseInputAdapter {
 	private GamePanel gamePanel;
 	private GameServiceImpl gameService;
@@ -21,7 +24,6 @@ public class BeginListener extends MouseInputAdapter {
 	private JLabel timeLabel;
 	private GameConfiguration config;
 	private Timer timer;
-	private GameTimer task;
 	private MainFrame mainFrame;
 
 	public BeginListener(MainFrame mainFrame, GamePanel gamePanel,
@@ -35,12 +37,13 @@ public class BeginListener extends MouseInputAdapter {
 		this.mainFrame = mainFrame;
 	}
 
-	public Timer getTimer() {
+	Timer getTimer() {
 		return this.timer;
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
-		mainFrame.romoveBackGroundPanel();
+		mainFrame.removeBackGroundPanel();
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		if (this.timer != null) {
 			this.timer.cancel();
@@ -51,7 +54,7 @@ public class BeginListener extends MouseInputAdapter {
 		pointLabel.setText("0");
 		timeLabel.setText(String.valueOf(config.getLimitedTime()));
 		gameService.start();
-		task = new GameTimer(this.gamePanel, this.config.getLimitedTime(),
+		GameTimer task = new GameTimer(this.gamePanel, this.config.getLimitedTime(),
 				this.timeLabel);
 		timer.schedule(task, 0, 1000);
 		gamePanel.repaint();

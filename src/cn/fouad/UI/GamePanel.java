@@ -18,7 +18,7 @@ import cn.fouad.timer.GameTimer;
 import cn.fouad.utils.ImageUtils;
 
 /**
- * Game panel
+ * 游戏面板
  */
 public class GamePanel extends JPanel {
 
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
 
 	private Piece selectPiece;
 	private LinkInfo linkInfo;
-	private BufferedImage gameoverImage;
+	private BufferedImage gameOverImage;
 
 	public void setLinkInfo(LinkInfo linkInfo) {
 		this.linkInfo = linkInfo;
@@ -40,12 +40,12 @@ public class GamePanel extends JPanel {
 		this.gameService = gameService;
 	}
 
-	public void setOverImage(BufferedImage gameoverImage) {
-		this.gameoverImage = gameoverImage;
+	public void setOverImage(BufferedImage gameOverImage) {
+		this.gameOverImage = gameOverImage;
 	}
 
 	public BufferedImage getOverImage() {
-		return gameoverImage;
+		return gameOverImage;
 	}
 
 	public void setSelectPiece(Piece piece) {
@@ -85,8 +85,8 @@ public class GamePanel extends JPanel {
 			drawLine(this.linkInfo, g);
 			this.linkInfo = null;
 		}
-		if (this.gameoverImage != null) {
-			g.drawImage(this.gameoverImage, 0, 0, null);
+		if (this.gameOverImage != null) {
+			g.drawImage(this.gameOverImage, 0, 0, null);
 		}
 	}
 

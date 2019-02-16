@@ -1,6 +1,10 @@
 package cn.fouad.exception;
 
- 
+
+/**
+ * 未完成
+ * 自定义游戏异常
+ */
 public class GameException extends Exception {
 	private static final long serialVersionUID = 1L;
 

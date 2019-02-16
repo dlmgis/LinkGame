@@ -14,16 +14,15 @@ import javax.swing.ImageIcon;
 import cn.fouad.exception.GameException;
 
 /**
- * ImageUtils
- * 
+ * 图片常用操作工具类
  */
 public class ImageUtils {
-	public static String IMAGETYPE = ".gif";
-	public static String IMAGEFOLDERNAME = "images";
-	public static String PIECEIMAGEFOLDERNAME = "pieces";
+	public static String IMAGE_TYPE = ".gif"; // 图片类型
+	public static String IMAGE_FOLDER_NAME = "images"; // 图片文件夹
+	public static String PIECE_IMAGE_FOLDER_NAME = "pieces"; // 元素块所在文件夹
 
-	public static boolean eauals(BufferedImage imagea, BufferedImage imageb) {
-		return imagea.equals(imageb);
+	public static boolean equals(BufferedImage imageA, BufferedImage imageB) {
+		return imageA.equals(imageB);
 	}
 
 	public static List<BufferedImage> getImages(File folder, String suffix)
@@ -73,12 +72,12 @@ public class ImageUtils {
 			throws GameException {
 		List<BufferedImage> result = new ArrayList<BufferedImage>();
 		if (size % 2 != 0) {
-			throw new GameException("size Error��" + size);
+			throw new GameException("大小异常，图片边长不是偶数" + size);
 		}
-		List<BufferedImage> images = new ArrayList<BufferedImage>();
+		List<BufferedImage> images;
 		try {
-			images = getImages(new File(IMAGEFOLDERNAME + File.separator
-					+ PIECEIMAGEFOLDERNAME), IMAGETYPE);
+			images = getImages(new File(IMAGE_FOLDER_NAME + File.separator
+					+ PIECE_IMAGE_FOLDER_NAME), IMAGE_TYPE);
 			images = getRandomImages(images, size / 2);
 			result.addAll(images);
 			result.addAll(randomImages(images));
@@ -96,10 +95,10 @@ public class ImageUtils {
 		ImageIcon imageIcon = null;
 		try {
 			imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
-					IMAGEFOLDERNAME + File.separator + "background_image"
-							+ IMAGETYPE));
+					IMAGE_FOLDER_NAME + File.separator + "background_image"
+							+ IMAGE_TYPE));
 		} catch (Exception e) {
-			throw new GameException("Load image resources error!");
+			throw new GameException("加载图片资源错误!");
 		}
 		return imageIcon;
 	}
