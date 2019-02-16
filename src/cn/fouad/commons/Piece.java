@@ -12,97 +12,97 @@ import cn.fouad.utils.ImageUtils;
  * indexPoint 索引点
  */
 public class Piece {
-	private Point beginPoint;
-	private Point endPoint;
-	private Point indexPoint;
-	private BufferedImage image;
+    private Point beginPoint;
+    private Point endPoint;
+    private Point indexPoint;
+    private BufferedImage image;
 
-	public Piece(Point beginPoint, Point indexPoint, BufferedImage image) {
-		this.beginPoint = beginPoint;
-		this.endPoint = new Point(beginPoint.getX() + image.getWidth(),
-				beginPoint.getY() + image.getHeight());
-		this.indexPoint = indexPoint;
-		this.image = image;
-	}
+    public Piece(Point beginPoint, Point indexPoint, BufferedImage image) {
+        this.beginPoint = beginPoint;
+        this.endPoint = new Point(beginPoint.getX() + image.getWidth(),
+                beginPoint.getY() + image.getHeight());
+        this.indexPoint = indexPoint;
+        this.image = image;
+    }
 
-	public Piece(Point beginPoint, Point indexPoint, int xStep, int yStep) {
-		this.beginPoint = beginPoint;
-		this.endPoint = new Point(beginPoint.getX() + xStep, beginPoint.getY()
-				+ yStep);
-		this.indexPoint = indexPoint;
-		this.image = null;
-	}
+    public Piece(Point beginPoint, Point indexPoint, int xStep, int yStep) {
+        this.beginPoint = beginPoint;
+        this.endPoint = new Point(beginPoint.getX() + xStep, beginPoint.getY()
+                + yStep);
+        this.indexPoint = indexPoint;
+        this.image = null;
+    }
 
-	public Piece() {
+    public Piece() {
 
-	}
+    }
 
-	public Piece(Point indexPoint) {
-		super();
-		this.beginPoint = null;
-		this.endPoint = null;
-		this.indexPoint = indexPoint;
-		this.image = null;
-	}
+    public Piece(Point indexPoint) {
+        super();
+        this.beginPoint = null;
+        this.endPoint = null;
+        this.indexPoint = indexPoint;
+        this.image = null;
+    }
 
-	public int getBeginX() {
-		return getBeginPoint().getX();
-	}
+    public int getBeginX() {
+        return getBeginPoint().getX();
+    }
 
-	public int getBeginY() {
-		return getBeginPoint().getY();
-	}
+    public int getBeginY() {
+        return getBeginPoint().getY();
+    }
 
-	public int getEndX() {
-		return getEndPoint().getX();
-	}
+    public int getEndX() {
+        return getEndPoint().getX();
+    }
 
-	public int getEndY() {
-		return getEndPoint().getY();
-	}
+    public int getEndY() {
+        return getEndPoint().getY();
+    }
 
-	public int getXIndex() {
-		return getIndexPoint().getX();
-	}
+    public int getXIndex() {
+        return getIndexPoint().getX();
+    }
 
-	public int getYIndex() {
-		return getIndexPoint().getY();
-	}
+    public int getYIndex() {
+        return getIndexPoint().getY();
+    }
 
-	public Point getBeginPoint() {
-		return beginPoint;
-	}
+    public Point getBeginPoint() {
+        return beginPoint;
+    }
 
-	public void setBeginPoint(Point beginPosition) {
-		this.beginPoint = beginPosition;
-	}
+    public void setBeginPoint(Point beginPosition) {
+        this.beginPoint = beginPosition;
+    }
 
-	private Point getEndPoint() {
-		return endPoint;
-	}
+    private Point getEndPoint() {
+        return endPoint;
+    }
 
-	public void setEndPoint(Point endPosition) {
-		this.endPoint = endPosition;
-	}
+    public void setEndPoint(Point endPosition) {
+        this.endPoint = endPosition;
+    }
 
-	public Point getIndexPoint() {
-		return indexPoint;
-	}
+    public Point getIndexPoint() {
+        return indexPoint;
+    }
 
-	public void setIndexPoint(Point indexPosition) {
-		this.indexPoint = indexPosition;
-	}
+    public void setIndexPoint(Point indexPosition) {
+        this.indexPoint = indexPosition;
+    }
 
-	public BufferedImage getImage() {
-		return image;
-	}
+    public BufferedImage getImage() {
+        return image;
+    }
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
 
-	public boolean HasSameImage(Piece piece) {
-		return ImageUtils.equals(image, piece.getImage());
-	}
+    public boolean HasSameImage(Piece piece) {
+        return ImageUtils.equals(image, piece.getImage());
+    }
 
 }

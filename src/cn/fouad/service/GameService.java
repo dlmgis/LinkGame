@@ -9,14 +9,14 @@ import cn.fouad.commons.Piece;
  */
 public interface GameService {
 
-	void start();
+    void start();
 
-	Piece[][] getPieces();
+    Piece[][] getPieces();
 
-	Piece findPiece(int x, int y);
+    Piece findPiece(int x, int y);
 
-	LinkInfo link(Piece aPiece, Piece bPiece);
+    LinkInfo link(Piece aPiece, Piece bPiece);
 
-	boolean empty();
+    boolean empty();
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LinkInfo {
 
-	private List<Piece> pieces = new ArrayList<Piece>();
+	private List<Piece> pieces = new ArrayList<>();
 
 	public LinkInfo(Piece... aPieces) {
 		this.pieces.addAll(Arrays.asList(aPieces));

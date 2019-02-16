@@ -33,6 +33,11 @@ public class GameServiceImpl implements GameService {
 		this.pieces = gameModel.createRealPieces(config);
 	}
 
+	/**
+	 * 从配置对象中读取信息随机生成游戏模式
+	 * @param config 配置对象
+	 * @return 游戏模式
+	 */
 	private GameModel createGameModel(GameConfiguration config) {
 		Random random = new Random();
 		switch (random.nextInt(config.MODELNUM)) {

@@ -29,7 +29,7 @@ import cn.fouad.listener.GameListener;
 import cn.fouad.service.impl.GameServiceImpl;
 
 /**
- * MainFrame
+ * 主窗口
  */
 public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -40,13 +40,19 @@ public class MainFrame extends JFrame {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException
                 | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "WARNING",
+            JOptionPane.showMessageDialog(this, e.getMessage(), "警告",
                     JOptionPane.WARNING_MESSAGE);
         }
         initialize();
         setVisible(true);
     }
 
+    /**
+     * 绘制背景图
+     *
+     * @param g 绘图
+     */
+    @Override
     public void printComponents(Graphics g) {
         try {
             g.drawImage(ImageIO.read(new File("images/bg_image.jpg")), 0, 0,
@@ -84,6 +90,7 @@ public class MainFrame extends JFrame {
         final GameConfiguration config = new GameConfiguration(16, 10,
                 new Point(50, 100), 10, 150); // 基础配置
         final GameServiceImpl gameService = new GameServiceImpl(config); // 核心业务逻辑
+        // 构造游戏界面
         final GamePanel gamePanel = new GamePanel(gameService);
         JPanel controlPanel = new JPanel();
         controlPanel.setBackground(new Color(127, 174, 252));
