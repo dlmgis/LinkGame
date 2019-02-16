@@ -30,7 +30,7 @@ public class GameListener extends MouseInputAdapter {
                         JLabel gradeLabel, BeginListener beginListener) {
         this.gameService = gameService;
         this.gamePanel = gamePanel;
-        this.selects = new ArrayList<Piece>();
+        this.selects = new ArrayList<>();
         this.gradeLabel = gradeLabel;
         this.beginListener = beginListener;
     }

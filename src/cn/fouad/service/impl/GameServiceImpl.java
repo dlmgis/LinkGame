@@ -23,10 +23,18 @@ public class GameServiceImpl implements GameService {
 	private GameModel gameModel;
 	private long grade = 0;
 
+	/**
+	 * 通过配置信息创建游戏业务逻辑
+	 * @param config 配置信息
+	 */
 	public GameServiceImpl(GameConfiguration config) {
 		this.config = config;
 	}
 
+	/**
+	 * 启动 获得游戏模式
+	 */
+	@Override
 	public void start() {
 		this.gameModel = createGameModel(config);
 		assert gameModel != null;
@@ -56,21 +64,23 @@ public class GameServiceImpl implements GameService {
 		}
 	}
 
+	/**
+	 * 获取图片
+	 * @return 游戏图片
+	 */
+	@Override
 	public Piece[][] getPieces() {
 		return this.pieces;
 	}
 
-	public Piece getPiece(int xIndex, int yIndex) {
-		if (xIndex < 0 || yIndex < 0) {
-			return null;
-		}
-		if (xIndex > config.getRowNums() - 1
-				|| yIndex > config.getColumnNums() - 1) {
-			return null;
-		}
-		return this.pieces[xIndex][yIndex];
-	}
-
+	/**
+	 * 游戏核心
+	 * 判断两个图片是否能连上，返回连接信息
+	 * @param aPiece
+	 * @param bPiece
+	 * @return 连接信息
+	 */
+	@Override
 	public LinkInfo link(Piece aPiece, Piece bPiece) {
 		Point aPieceBeginPoint = aPiece.getBeginPoint();
 		Point bPieceBeginPoint = bPiece.getBeginPoint();
@@ -110,6 +120,13 @@ public class GameServiceImpl implements GameService {
 		return null;
 	}
 
+	/**
+	 * @param aPiece 一个图片
+	 * @param bPiece 一个图片
+	 * @param xStep X轴路径长度
+	 * @param yStep Y轴路径长度
+	 * @return 图片
+	 */
 	private Piece getCornerPiece(Piece aPiece, Piece bPiece, int xStep, int yStep) {
 		if (aPiece.getBeginX() > bPiece.getBeginX()) {
 			return getCornerPiece(bPiece, aPiece, xStep, yStep);
@@ -144,10 +161,10 @@ public class GameServiceImpl implements GameService {
 
 	private LinkInfo getShortCut(Piece aPiece, Piece bPiece,
 			Map<Piece, Piece> linkPieces, int distance) {
-		List<LinkInfo> infos = new ArrayList<LinkInfo>();
+		List<LinkInfo> infos = new ArrayList<>();
 		for (Object key : linkPieces.keySet()) {
 			infos.add(new LinkInfo(aPiece, (Piece) key, linkPieces
-					.get((Piece) key), bPiece));
+					.get(key), bPiece));
 		}
 		return getShortCut(infos, distance);
 	}
@@ -156,16 +173,16 @@ public class GameServiceImpl implements GameService {
 		LinkInfo result = null;
 		int tempDistance = 0;
 		for (int i = 0; i < infos.size(); i++) {
-			int adistance = totalDistance(infos.get(i).getPieces());
+			int aDistance = totalDistance(infos.get(i).getPieces());
 			LinkInfo info = infos.get(i);
 			;
 			if (i == 0) {
 				result = info;
-				tempDistance = adistance - distance;
+				tempDistance = aDistance - distance;
 			}
-			if (adistance - distance < tempDistance) {
+			if (aDistance - distance < tempDistance) {
 				result = info;
-				tempDistance = adistance - distance;
+				tempDistance = aDistance - distance;
 			}
 		}
 		return result;
@@ -395,10 +412,6 @@ public class GameServiceImpl implements GameService {
 		return true;
 	}
 
-	public boolean hasPiece(int x, int y) {
-		return findPiece(x, y) != null;
-	}
-
 	private boolean hasImage(int x, int y) {
 		Piece piece = findPiece(x, y);
 		if (piece == null) {
@@ -408,23 +421,16 @@ public class GameServiceImpl implements GameService {
 		return piece.getImage() != null;
 	}
 
-	public Point getIndexPoint(int relativeX, int relativeY, int pieceSide) {
-		if (pieceSide < 0)
-			return null;
-		return new Point(getXIndex(relativeX, pieceSide), getYIndex(relativeY,
-				pieceSide));
-	}
-
 	private int getXIndex(int relativeX, int pieceWidth) {
 		if (pieceWidth < 0)
 			return -1;
-		return (int) relativeX / pieceWidth;
+		return relativeX / pieceWidth;
 	}
 
 	private int getYIndex(int relativeY, int pieceHeight) {
 		if (pieceHeight < 0)
 			return -1;
-		return (int) relativeY / pieceHeight;
+		return relativeY / pieceHeight;
 	}
 
 	public Piece findPiece(int x, int y) {
@@ -452,21 +458,9 @@ public class GameServiceImpl implements GameService {
 		return gameModel;
 	}
 
-	public void setGameModel(GameModel gameModel) {
-		this.gameModel = gameModel;
-	}
-
 	public long countGrade() {
 		this.grade += this.config.getPerGrade();
 		return this.grade;
-	}
-
-	public long getGrade() {
-		return grade;
-	}
-
-	public void setGrade(long grade) {
-		this.grade = grade;
 	}
 
 }
