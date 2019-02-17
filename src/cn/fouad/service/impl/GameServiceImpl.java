@@ -436,6 +436,7 @@ public class GameServiceImpl implements GameService {
     }
 
     public Piece findPiece(int x, int y) {
+        // 避免错误
         if (this.gameModel == null) {
             return null;
         }

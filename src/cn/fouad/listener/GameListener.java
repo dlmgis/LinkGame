@@ -20,6 +20,7 @@ import cn.fouad.utils.ImageUtils;
  */
 public class GameListener extends MouseInputAdapter {
     private GameServiceImpl gameService;
+    // 被选中的图片
     private List<Piece> selects;
     private GamePanel gamePanel;
 
@@ -52,21 +53,26 @@ public class GameListener extends MouseInputAdapter {
         if (gamePanel.getOverImage() != null) {
             return;
         }
+        // 从业务逻辑中读取游戏棋盘
         Piece[][] pieces = gameService.getPieces();
         int mouseX = event.getX();
         int mouseY = event.getY();
+        // 获取选中的图片
         Piece currentPiece = gameService.findPiece(mouseX, mouseY);
         if (currentPiece == null || currentPiece.getImage() == null)
             return;
         gamePanel.setSelectPiece(currentPiece);
+        // 如果选中的图片列表空空如也，将当前游戏图片放进去
         if (this.selects.size() == 0) {
             this.selects.add(currentPiece);
             gamePanel.repaint();
             return;
         }
+        // 如果有一个了，就要判断是否能连上
         if (this.selects.size() == 1) {
             Piece prePiece = this.selects.get(0);
             LinkInfo linkInfo = this.gameService.link(prePiece, currentPiece);
+            // 如果没连上，linkInfo就是队列，去掉第一个图片，把第二个图片添加进来
             if (linkInfo == null) {
                 this.selects.remove(0);
                 this.selects.add(currentPiece);
@@ -74,10 +80,12 @@ public class GameListener extends MouseInputAdapter {
                 gamePanel.setLinkInfo(linkInfo);
                 gamePanel.setSelectPiece(null);
                 long grade = gameService.countGrade();
+                // 更新等级
                 gradeLabel.setText(String.valueOf(grade));
                 pieces[prePiece.getXIndex()][prePiece.getYIndex()] = null;
                 pieces[currentPiece.getXIndex()][currentPiece.getYIndex()] = null;
                 this.selects.remove(0);
+                // 如果图片空空了，获得胜利
                 if (gameService.empty()) {
                     try {
                         gamePanel.setOverImage(ImageUtils.getImage("images/win.gif"));
