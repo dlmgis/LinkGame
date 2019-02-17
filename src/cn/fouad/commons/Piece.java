@@ -6,10 +6,6 @@ import cn.fouad.utils.ImageUtils;
 
 /**
  * 一个连连看元素 游戏图片
- * beginPoint 图片左上角的坐标
- * endPoint 图片右下角的坐标，由构造方法自动获得
- * image 显示的图片
- * indexPoint 索引点
  */
 public class Piece {
     private Point beginPoint;

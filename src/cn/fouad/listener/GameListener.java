@@ -26,6 +26,13 @@ public class GameListener extends MouseInputAdapter {
     private JLabel gradeLabel;
     private BeginListener beginListener;
 
+    /**
+     * 游戏事件监听，完成对游戏中业务逻辑的调用
+     * @param gameService 游戏逻辑
+     * @param gamePanel 游戏面板
+     * @param gradeLabel 游戏标签 时间等
+     * @param beginListener 游戏初始化监听
+     */
     public GameListener(GameServiceImpl gameService, GamePanel gamePanel,
                         JLabel gradeLabel, BeginListener beginListener) {
         this.gameService = gameService;
@@ -35,7 +42,13 @@ public class GameListener extends MouseInputAdapter {
         this.beginListener = beginListener;
     }
 
+    /**
+     *
+     * @param event 按下鼠标时触发
+     */
+    @Override
     public void mousePressed(MouseEvent event) {
+        // 如果游戏面板出现了游戏结束的图片则返回
         if (gamePanel.getOverImage() != null) {
             return;
         }
