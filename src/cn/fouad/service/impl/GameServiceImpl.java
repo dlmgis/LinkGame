@@ -15,8 +15,8 @@ import cn.fouad.service.GameService;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 使用模板模式
  * 游戏业务逻辑的具体实现
+ * 整个游戏的核心代码
  */
 public class GameServiceImpl implements GameService {
     private Piece[][] pieces = null;
@@ -198,11 +198,24 @@ public class GameServiceImpl implements GameService {
         return result;
     }
 
+    /**
+     * 获取距离
+     * @param aPiece 一个图片
+     * @param bPiece 一个图片
+     * @return 距离
+     */
     private int getDistance(Piece aPiece, Piece bPiece) {
         return Math.abs(aPiece.getBeginX() - bPiece.getBeginX())
                 + Math.abs(aPiece.getBeginY() - bPiece.getBeginY());
     }
 
+    /**
+     * @param aPiece 一个图片
+     * @param bPiece 一个图片
+     * @param xStep X步长
+     * @param yStep Y步长
+     * @return 集合
+     */
     private Map<Piece, Piece> getLinkPieces(Piece aPiece, Piece bPiece, int xStep,
                                             int yStep) {
         Map<Piece, Piece> result = new HashMap<Piece, Piece>();
@@ -429,6 +442,11 @@ public class GameServiceImpl implements GameService {
         return relativeX / pieceWidth;
     }
 
+    /**
+     * @param relativeY
+     * @param pieceHeight
+     * @return
+     */
     private int getYIndex(int relativeY, int pieceHeight) {
         if (pieceHeight < 0)
             return -1;

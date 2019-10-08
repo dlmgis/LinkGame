@@ -67,6 +67,7 @@ public class GameConfiguration {
 
     /**
      * 获取起始点，点对象
+     *
      * @return 起始点，点对象
      */
     public Point getBeginPoint() {
